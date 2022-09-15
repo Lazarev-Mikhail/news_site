@@ -1,0 +1,55 @@
+html {
+    background-color: #fff;
+}
+
+header {
+    background-color: #4e4ce5;
+    height: 70px;
+}
+
+header div.logo {
+    position: relative;
+    top: 10px;
+    left: 30px;
+}
+
+header div.name {
+    position: relative;
+    bottom: 55px;
+    left: 90px;
+}
+
+header div.name h1 {
+    font-size: 30px;
+    color: white;
+}
+nav {
+    background-color: #577275;
+    margin: 10px 0px 10px 0px;
+}
+
+nav ul {
+    margin: 0px;
+    list-style-type: none;
+    padding: 5px 0px 5px 0px;
+}
+nav ul li {
+    display: inline;
+    padding: 5px 10px 5px 10px;
+}
+nav ul li a:link, nav ul li a:visited {
+    color: #fff;
+    border-bottom: none;
+    font-weight: bold;
+}
+
+footer {
+    padding: 5px 0px 5px 0px;
+    background-color: #d6d6d6;
+    text-align: center;
+    height: 60px;
+}
+
+footer p {
+    font-size: 12px;
+}
