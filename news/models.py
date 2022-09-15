@@ -17,7 +17,7 @@ class News(models.Model):
     null=True, related_name='news')
     image = models.FileField(upload_to='gallery')
     content = models.TextField(blank=True)
-    time = models.DateTimeField()
+    time = models.DateTimeField(auto_now=True)
     slug_news = models.SlugField(default='', null=False, db_index=True)
 
     # def get_url(self):
