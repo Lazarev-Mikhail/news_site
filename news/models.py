@@ -28,10 +28,14 @@ class News(models.Model):
     name = models.CharField(max_length=150, default=name_default)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
     null=True, related_name='news')
-    image = models.FileField(upload_to='gallery', default='index.jpeg')
+    image = models.FileField(upload_to='gallery', default='gallery/index.jpeg')
     content = models.TextField(blank=False, default=content_default)
     time = models.DateTimeField(auto_now=True)
     slug_news = models.SlugField(null=False, db_index=True)
+
+
+    class Meta:
+        ordering = ["-time"]
 
     # def get_url(self):
     #     return reverse('one_news', args=[self.slug_news])

@@ -1,0 +1,9 @@
+section.last_news article {
+    border: 1px solid #f5f5f5;
+    border-radius: 15px;
+    padding: 0px;
+    margin: 30px auto 30px auto;
+    width: 500px;
+    text-align: center;
+    background-color: #c0d1cc;
+}

@@ -2,10 +2,30 @@
 {% load static %}
 
 {% block css_additional %}
-    <link rel="stylesheet" href="{% static 'news/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'news/index.css' %}">
 {% endblock %}
 
 {% block title %} Главная {% endblock %}
 {% block content %}
+        <h1>Последние новости</h1>
+        <section class="last_news">
+           {% for news in last_news %}
+                <article>
+                    <h1>{{ news.name }}</h1>
+                    {{ news.category }}
+                    <p><img src="{{ news.image.url }}" alt=""></p>
+                    {{ news.time }}
+                </article>
+            {% endfor %}
 
+        </section>
+
+    <p>
+        <h1>Другие новости</h1>
+        <div>
+            {% for news in other_news %}
+                {{ news.name }}
+            {% endfor %}
+        </div>
+    </p>
 {% endblock %}
