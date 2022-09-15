@@ -1,2 +1,7 @@
 /venv/
 /.idea/
+*.log
+*.pot
+*.pyc
+__pycache__
+media
