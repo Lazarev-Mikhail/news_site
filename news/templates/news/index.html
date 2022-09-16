@@ -7,59 +7,49 @@
 
 {% block title %} Главная {% endblock %}
 {% block content %}
-
-    <nav class="navbar navbar-expand-lg bg-dark fixed-top">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">
-                <img src="{% static 'news/logo.png' %}" alt="" width="30" height="40" class="d-inline-block">
-                Проект сайта новостей
-            </span>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Главная</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Категории
-                        </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Действие</a></li>
-                                <li><a class="dropdown-item" href="#">Другое действие</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
-                            </ul>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-        <h1>Последние новости</h1>
-        <div class="conteiner">
-            <div class="row">
-                {% for news in last_news %}
-                    <div class="col-md-6">
-                        <h1>{{ news.name }}</h1>
-                        {{ news.category }}
-                        <p><img src="{{ news.image.url }}" alt=""></p>
-                        {{ news.time }}
+    <h1 class="text-center lh-lg">Последние новости</h1>
+    <div class="conteiner px-4">
+        <div class="row justify-content-center gy-5">
+            {% for news in last_news %}
+                <div class="col-md-6">
+                    <div class="card text-bg-secondary">
+                        <div class="card-header text-center ">
+                            <h2><a href="#">{{ news.name }}</a></h2>
+                        </div>
+                        <img src="{{ news.image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">{{ news.content|truncatewords:30 }}</p>
+                        </div>
+                        <div class="card-body">
+                            <a href="#" class="card-link">{{ news.category }}</a>
+                        </div>
+                        <div class="card-footer">
+                            Добавлено: {{ news.time }}
+                        </div>
                     </div>
-                {% endfor %}
-            </div>
-        </div>
-
-
-    <p>
-        <h1>Другие новости</h1>
-        <div>
-            {% for news in other_news %}
-                {{ news.name }}
+                </div>
             {% endfor %}
         </div>
-    </p>
+    </div>
+
+    <h1 class="text-center lh-lg">Другие новости</h1>
+    <div class="conteiner px-4 bg-secondary bg-gradient mt-5 mb-5 pb-3">
+    <div class="row justify-content-center gy-5">
+        {% for news in other_news %}
+            <div class="col-md-3">
+                <div class="card text-bg-dark">
+                    <div class="card-header text-center ">
+                        <h4><a href="#">{{ news.name }}</a></h4>
+                    </div>
+                    <img src="{{ news.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="card-link" >{{ news.category }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
 {% endblock %}

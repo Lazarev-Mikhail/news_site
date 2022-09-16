@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from news.models import News
+from news.models import News, Category
 
 
 # Create your views here.
@@ -16,4 +16,6 @@ class NewsListView(ListView):
         # Add in a QuerySet of all the books
         context['last_news'] = News.objects.all()[:4]
         context['other_news'] = News.objects.all()[4:]
+        context['categories'] = Category.objects.all()
         return context
+
