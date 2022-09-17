@@ -35,7 +35,7 @@
     <h1 class="text-center lh-lg">Другие новости</h1>
     <div class="conteiner px-4 bg-secondary bg-gradient mt-5 mb-5 pb-3">
     <div class="row justify-content-center gy-5">
-        {% for news in other_news %}
+        {% for news in page_obj %}
             <div class="col-md-3">
                 <div class="card text-bg-dark">
                     <div class="card-header text-center ">
@@ -51,5 +51,24 @@
     </div>
 </div>
 
+<nav aria-label="...">
+    <ul class="pagination justify-content-center bg-dark">
+        {% if page_obj.has_previous %}
+            <li class="page-item "><a class="page-link link-dark" href="?page={{page_obj.number|add:-1}}#">Предыдущая</a></li>
+        {% endif %}
+        {% for page in page_counter %}
+            {% if page|add:1 == page_obj.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link link-dark" href="?page={{page|add:1}}">{{ page|add:1 }}</a>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link link-dark" href="?page={{page|add:1}}">{{ page|add:1 }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link link-dark" href="?page={{page_obj.number|add:1}}#">Следующая</a></li>
+        {% endif %}
+    </ul>
+</nav>
 
 {% endblock %}
