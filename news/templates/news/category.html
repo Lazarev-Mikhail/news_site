@@ -1,40 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css_additional %}
-{% endblock %}
 
-{% block title %} Главная {% endblock %}
+{% block title %} {{Главная}} {% endblock %}
 {% block content %}
-    <h1 class="text-center lh-lg">Последние новости</h1>
-    <div class="conteiner px-4">
-        <div class="row justify-content-center gy-5">
-            {% for news in last_news %}
-                <div class="col-md-6">
-                    <div class="card text-bg-secondary">
-                        <div class="card-header text-center ">
-                            <h2><a href="#">{{ news.name }}</a></h2>
-                        </div>
-                        <img src="{{ news.image.url }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">{{ news.content|truncatewords:30 }}</p>
-                        </div>
-                        <div class="card-body">
-                            <a href="#" class="card-link">{{ news.category }}</a>
-                        </div>
-                        <div class="card-footer">
-                            Добавлено: {{ news.time }}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
     <h1 class="text-center lh-lg">Другие новости</h1>
     <div class="conteiner px-4 bg-secondary bg-gradient mt-5 mb-5 pb-3">
     <div class="row justify-content-center gy-5">
-        {% for news in page_obj %}
+        {% for news in news_queryset %}
             <div class="col-md-3">
                 <div class="card text-bg-dark">
                     <div class="card-header text-center ">
@@ -71,3 +44,4 @@
 </nav>
 
 {% endblock %}
+
