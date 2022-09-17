@@ -1,10 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from news.models import News, Category
 from django.core.paginator import Paginator
-from django.views.generic.base import TemplateView
-
-
+from django.views.generic.detail import DetailView
 
 
 # Create your views here.
@@ -37,7 +35,20 @@ class News_of_categoryListView(ListView):
         news_queryset = object_category.news.all()
         paginator = Paginator(news_queryset, self.paginate_by)
         page = self.request.GET.get('page')
+        context['category'] = category
         context['news_queryset'] = news_queryset
         context['categories'] = Category.objects.all()
         context['page_counter'] = range(paginator.num_pages)
         return context
+
+
+class NewsDetailView(DetailView):
+    model = News
+    template_name = 'news/news.html'
+
+    def get(self, request, *args, **kwargs):
+        news = get_object_or_404(News, slug_news=kwargs['slug_news'])
+        return render(request, 'news/news.html', context={
+            'news': news,
+            'categories': Category.objects.all(),
+        })

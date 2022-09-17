@@ -13,14 +13,14 @@
                 <div class="col-md-6">
                     <div class="card text-bg-secondary">
                         <div class="card-header text-center ">
-                            <h2><a href="#">{{ news.name }}</a></h2>
+                            <h2><a href="{% url 'news' news.slug_news %}">{{ news.name }}</a></h2>
                         </div>
                         <img src="{{ news.image.url }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">{{ news.content|truncatewords:30 }}</p>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="card-link">{{ news.category }}</a>
+                            <a href="{% url 'one_category' news.category %}" class="card-link">{{ news.category }}</a>
                         </div>
                         <div class="card-footer">
                             Добавлено: {{ news.time }}
@@ -38,11 +38,11 @@
             <div class="col-md-3">
                 <div class="card text-bg-dark">
                     <div class="card-header text-center ">
-                        <h4><a href="#">{{ news.name }}</a></h4>
+                        <h4><a href="{% url 'news' news.slug_news %}">{{ news.name }}</a></h4>
                     </div>
                     <img src="{{ news.image.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <a href="#" class="card-link" >{{ news.category }}</a>
+                        <a href="{% url 'one_category' news.category %}" class="card-link" >{{ news.category }}</a>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{ category }} {% endblock %}
+{% block content %}
+<h1 class="text-center lh-lg">{{ news.name }}</h1>
+<div class="card mx-auto vw-100">
+    <img src="{{ news.image.url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <p class="card-text">{{ news.content }}</p>
+        <a href="{% url 'one_category' news.category %}" class="card-link">{{ news.category }}</a>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Первый коментарий</li>
+        <li class="list-group-item">Второй коментарий</li>
+        <li class="list-group-item">Третий коментарий</li>
+    </ul>
+</div>
+{% endblock %}

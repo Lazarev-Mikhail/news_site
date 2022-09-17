@@ -2,25 +2,27 @@
 {% load static %}
 
 
-{% block title %} {{Главная}} {% endblock %}
+{% block title %} {{ category }} {% endblock %}
 {% block content %}
-    <h1 class="text-center lh-lg">Другие новости</h1>
-    <div class="conteiner px-4 bg-secondary bg-gradient mt-5 mb-5 pb-3">
-    <div class="row justify-content-center gy-5">
-        {% for news in news_queryset %}
-            <div class="col-md-3">
-                <div class="card text-bg-dark">
-                    <div class="card-header text-center ">
-                        <h4><a href="#">{{ news.name }}</a></h4>
-                    </div>
-                    <img src="{{ news.image.url }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <a href="#" class="card-link" >{{ news.category }}</a>
-                    </div>
+<h1 class="text-center lh-lg">{{ category }}</h1>
+
+<div class="conteiner bg-light">
+    {% for news in news_queryset %}
+        <div class="card mb-5 mx-auto" style="max-width: 850px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ news.image.url }}" class="img-fluid rounded-start h-100" alt="...">
+                </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'news' news.slug_news %}">{{ news.name }}</a></h5>
+                    <p class="card-text">{{ news.content|truncatewords:50 }}</p>
+                    <p class="card-text"><small class="text-muted">Добавлено: {{ news.time }}</small></p>
                 </div>
             </div>
-        {% endfor %}
-    </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 <nav aria-label="...">
