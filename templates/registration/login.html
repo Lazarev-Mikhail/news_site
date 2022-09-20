@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
 
@@ -7,35 +6,25 @@
   <p>Введите корректные имя пользователя и пароль учётной записи. Пожалуйста, повоторите попытку.</p>
 {% endif %}
 
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>У вашего аккаунта нет доступа к этой странице. Чтобы продолжить,
-    пожалуйста войдите в аккаунт с необходимым уровнем доступа.</p>
-    <p>Пожалуйста войдите в аккаунт, чтобы увидеть эту страницу.</p>
-  {% endif %}
-{% endif %}
-<p>Ещё не зарегистрированы. Перейдите по ссылке, чтобы <a href="{% url 'register' %}">зарегистрироваться.</a></p>
-
-<form method="post" action="{% url 'login' %}">
+<p class="text-center">Ещё не зарегистрированы. Перейдите по ссылке, чтобы <a href="{% url 'register' %}">зарегистрироваться.</a></p>
+<div class="mx-auto" style="width: 300px;">
+<form method="post" action="{% url 'login' %}" >
 {% csrf_token %}
-<table>
-
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
+<div class="mx-auto" style='width: 200px;' >
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-dark" value="{{next}}">Войти</button>
+</div>
 </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+<p class="text-center"><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
 
 {% endblock %}

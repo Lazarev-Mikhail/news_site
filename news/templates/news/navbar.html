@@ -21,22 +21,17 @@
                                 {% endfor %}
                             </ul>
                     </li>
-                    <li>
+                </ul>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Введите название статьи" aria-label="Поиск">
                             <button class="btn btn-outline-light" type="submit">Поиск</button>
                         </form>
-                    </li>
                     {% if user.is_authenticated %}
-                        <li>
                             <a class="btn btn-outline-light" href="{% url 'logout' %}" role="button">Выход</a>
-                        </li>
                     {% else %}
-                        <li>
-                            <a class="btn btn-outline-light" href="{% url 'login' %}" role="button">Вход</a>
-                        </li>
+                            <a class="btn btn-dark" href="{% url 'login' %}" role="button">Вход</a>
                     {% endif %}
-                </ul>
+
 
 
             </div>

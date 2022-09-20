@@ -3,6 +3,7 @@
 {% block title %}Создайте аккаунт{% endblock %}
 
 {% block content %}
+<div class="mx-auto" style="width: 500px;">
     <h1>Создайте аккаунт</h1>
     <p>Пожалуйста заполните форму:</p>
     <form action="{% url 'register' %}" method="post">
@@ -10,4 +11,5 @@
         {% csrf_token %}
         <p><input type="submit" value="Создать аккаунт"></p>
     </form>
+</div>
 {% endblock %}
