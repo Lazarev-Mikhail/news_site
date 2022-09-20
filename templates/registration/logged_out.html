@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<p>Вы вышли!</p>
+
+<a href="{% url 'login'%}">Нажмите здесь чтобы снова войти в профиль.</a>
+{% endblock %}

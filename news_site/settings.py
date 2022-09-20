@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -112,3 +113,5 @@ try:
     from .local_settings import *
 except ImportError:
     from .prod_settings import *
+
+LOGIN_REDIRECT_URL = '/'
