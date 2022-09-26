@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
-from news.models import News, Category
+from news.models import News, Category, Comment
 from django.core.paginator import Paginator
 from django.views.generic.detail import DetailView
+from django import forms
 
 
 # Create your views here.
@@ -50,8 +51,10 @@ class NewsDetailView(DetailView):
         news = get_object_or_404(News, slug_news=kwargs['slug_news'])
         num_visits = request.session.get('num_visits', 0)
         request.session['num_visits'] = num_visits + 1
+        comments = Comment.objects.all()
         return render(request, 'news/news.html', context={
             'num_visits': num_visits,
             'news': news,
             'categories': Category.objects.all(),
+            'comments': comments,
         })

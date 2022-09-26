@@ -11,11 +11,19 @@
         <p class="card-text">{{ news.content }}</p>
         <a href="{% url 'one_category' news.category %}" class="card-link">{{ news.category }}</a>
     </div>
+    <h1 class="text-center lh-lg">Комментарии</h1>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Первый коментарий</li>
-        <li class="list-group-item">Второй коментарий</li>
-        <li class="list-group-item">Третий коментарий</li>
+        {% for comment in comments %}
+            <div class="card mx-auto vw-100" >
+                <div class="card-body">
+                    <h4 class="card-title">{{ comment.username }}</h4>
+                    <p class="card-text">{{ comment.comment_body }}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">{{comment.created}}</h6>
+                </div>
+            </div>
+        {% endfor %}
     </ul>
 </div>
-<h1>Просмотров: {{ num_visits }}</h1>
+
+
 {% endblock %}
