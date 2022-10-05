@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
-from news.models import News, Category, Comment
+from news.models import News, Category
 from django.core.paginator import Paginator
 from django.views.generic.detail import DetailView
-from django import forms
-
+from .forms import CommentForm
+from django.views.generic.edit import ModelFormMixin
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -42,19 +43,40 @@ class News_of_categoryListView(ListView):
         context['page_counter'] = range(paginator.num_pages)
         return context
 
-
-class NewsDetailView(DetailView):
+class NewsDetailView(ModelFormMixin, DetailView):
     model = News
     template_name = 'news/news.html'
+    form_class = CommentForm
 
     def get(self, request, *args, **kwargs):
         news = get_object_or_404(News, slug_news=kwargs['slug_news'])
-        num_visits = request.session.get('num_visits', 0)
-        request.session['num_visits'] = num_visits + 1
-        comments = Comment.objects.all()
+        comments = news.comments.all()
+        slug_news=kwargs['slug_news']
         return render(request, 'news/news.html', context={
-            'num_visits': num_visits,
             'news': news,
             'categories': Category.objects.all(),
             'comments': comments,
-        })
+            'form': self.get_form(),
+            })
+
+    def get_success_url(self):
+        return reverse_lazy('news', self.kwargs['slug_news'])
+
+    def post(self, request, *args, **kwargs):
+        news = get_object_or_404(News, slug_news=kwargs['slug_news'])
+        form = self.get_form()
+        comments = news.comments.all()
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.news_name = news
+            new_comment.username = request.user
+            new_comment.save()
+            return render(request, 'news/news.html', context={
+                'news': news,
+                'categories': Category.objects.all(),
+                'comments': comments,
+                'form' : self.get_form()
+                })
+        else:
+            return self.form_invalid(form)
+

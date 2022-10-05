@@ -14,7 +14,7 @@
     <h1 class="text-center lh-lg">Комментарии</h1>
     <ul class="list-group list-group-flush">
         {% for comment in comments %}
-            <div class="card mx-auto vw-100" >
+            <div class="card mx-auto vw-100 px-4 pb-3 m-2" >
                 <div class="card-body">
                     <h4 class="card-title">{{ comment.username }}</h4>
                     <p class="card-text">{{ comment.comment_body }}</p>
@@ -25,5 +25,14 @@
     </ul>
 </div>
 
+<form method="post">
+    {% csrf_token %}
+    {{ form.comment_body }}
+<!--    <label for="team_name">Enter name: </label>-->
+<!--    <input id="team_name" type="text" name="name_field" value="Default name for team.">-->
+    <div class="d-grid d-md-flex justify-content-md-end">
+       <button type="submit" class="btn btn-dark m-2">Прокомментировать</button>
+    </div>
+</form>
 
 {% endblock %}

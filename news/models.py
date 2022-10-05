@@ -10,6 +10,7 @@ class Category(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
 name_default = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 
 content_default = '''
@@ -24,16 +25,15 @@ Sed cursus orci quis felis volutpat, sit amet feugiat diam hendrerit. Suspendiss
 
 Curabitur nisl lorem, fermentum a tincidunt feugiat, pellentesque id tortor. In eget erat mi. Etiam ex risus, elementum ac nisl a, vestibulum interdum risus. Maecenas rhoncus faucibus purus, a suscipit orci. Duis tincidunt tempor nunc non feugiat. Curabitur porta, tortor eu pharetra pulvinar, risus est pulvinar dolor, nec porttitor metus elit in arcu. Aliquam erat volutpat. '''
 
-class News(models.Model):
 
+class News(models.Model):
     name = models.CharField(max_length=150, default=name_default)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
-    null=True, related_name='news')
+                                 null=True, related_name='news')
     image = models.FileField(upload_to='gallery', default='gallery/index.jpeg')
     content = models.TextField(blank=False, default=content_default)
     time = models.DateTimeField(auto_now=True)
     slug_news = models.SlugField(null=False, db_index=True)
-
 
     class Meta:
         ordering = ["-time"]
@@ -44,12 +44,13 @@ class News(models.Model):
     def __str__(self):
         return f'{self.name}-{self.time}'
 
+
 class Comment(models.Model):
+    id_comment = models.AutoField(auto_created=True, primary_key=True)
     news_name = models.ForeignKey(News, related_name='comments', on_delete=models.CASCADE)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.username, self.news_name)
