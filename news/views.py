@@ -69,13 +69,18 @@ class NewsDetailView(ModelFormMixin, DetailView):
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.news_name = news
-            new_comment.username = request.user
-            new_comment.save()
+            if request.user.is_authenticated:
+                new_comment.username = request.user
+                new_comment.save()
+                message = 'Ваш комментарий успешно добавлен'
+            else:
+                message = 'Чтобы добавить комментарий пожалуйста войдите в систему'
             return render(request, 'news/news.html', context={
                 'news': news,
                 'categories': Category.objects.all(),
                 'comments': comments,
-                'form' : self.get_form()
+                'form' : self.get_form(),
+                'message': message,
                 })
         else:
             return self.form_invalid(form)

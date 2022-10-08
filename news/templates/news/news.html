@@ -3,7 +3,12 @@
 
 
 {% block title %} {{ category }} {% endblock %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'news/news.css' %}">
+{% endblock %}
+
 {% block content %}
+<h3 class="text-center">{{ message }}</h3>
 <h1 class="text-center lh-lg">{{ news.name }}</h1>
 <div class="card mx-auto vw-100">
     <img src="{{ news.image.url }}" class="card-img-top" alt="...">
@@ -28,8 +33,6 @@
 <form method="post">
     {% csrf_token %}
     {{ form.comment_body }}
-<!--    <label for="team_name">Enter name: </label>-->
-<!--    <input id="team_name" type="text" name="name_field" value="Default name for team.">-->
     <div class="d-grid d-md-flex justify-content-md-end">
        <button type="submit" class="btn btn-dark m-2">Прокомментировать</button>
     </div>
